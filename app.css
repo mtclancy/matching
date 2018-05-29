@@ -1,0 +1,36 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.deck {
+    width: 660px;
+    background: linear-gradient(black,deepskyblue);
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    
+    
+}
+
+li {
+    width: 125px;
+    height: 125px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    border: 4px solid dimgray; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 10px;
+    
+}
+
+.picked {
+    background-color: red;
+}
