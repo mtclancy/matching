@@ -31,6 +31,14 @@ li {
     
 }
 
+i {
+    visibility: hidden;
+}
+
 .picked {
-    background-color: red;
+    background-color: plum;
+}
+
+.iconPicked {
+    visibility: visible;
 }
