@@ -50,31 +50,50 @@ function pickedItem() {
         let userIcon = document.getElementById('icon'+i);
         let changeColor = function() {
             userChoice.className = 'picked';
-            userIcon.style.visibility = 'visible';
-            firstClick();
+            userIcon.classList.add('visible');
+            userClicks();
         } 
         userChoice.addEventListener('click',changeColor);
     }
 }
 
 //if the class and styles match, trigger event.
-function firstClick() {
+function userClicks() {
     let firstPick = document.getElementsByClassName('picked')[0];
     let firstIcon = firstPick.firstChild.getAttribute('class');
     let secondPick = document.getElementsByClassName('picked')[1];
     let secondIcon = secondPick.firstChild.getAttribute('class');
+    
+    
     if (firstIcon === secondIcon) {
-        firstPick.style.backgroundColor = 'green';
-        secondPick.style.backgroundColor = 'green';
+        firstPick.classList.remove('incorrectPick');
+        secondPick.classList.remove('incorrectPick');
+        firstPick.classList.add('correctPick');
+        secondPick.classList.add('correctPick');
         firstPick.classList.remove('picked');
         secondPick.classList.remove('picked');} else {
-            firstPick.style.backgroundColor = 'red';
-            secondPick.style.backgroundColor = 'red';
-        let firstIcon = firstPick.firstChild;
-        let secondIcon = secondPick.firstChild;
-            firstIcon.style.visibility = 'hidden';
-            secondIcon.style.visibility = 'hidden';
+            let firstIcon = firstPick.firstChild;
+            let secondIcon = secondPick.firstChild;
+            firstPick.classList.add('incorrectPick');
+            secondPick.classList.add('incorrectPick');
             firstPick.classList.remove('picked');
-            secondPick.classList.remove('picked'); 
+            secondPick.classList.remove('picked');
         };
+    setTimeout(removeRedMarker, 2000);
 }
+
+function removeRedMarker() {
+    let firstIncorrect = document.getElementsByClassName('incorrectPick')[0];
+    let secondIncorrect = document.getElementsByClassName('incorrectPick')[1];
+    let firstIncorrectIcon = firstIncorrect.firstChild;
+    let secondIncorrectIcon = secondIncorrect.firstChild;
+    firstIncorrect.classList.remove('incorrectPick');
+    secondIncorrect.classList.remove('incorrectPick');
+    firstIncorrectIcon.classList.remove('visible');
+    secondIncorrectIcon.classList.remove('visible');
+}
+// firstIcon.style.visibility = 'hidden';
+   //         secondIcon.style.visibility = 'hidden';
+     //       
+       //     
+

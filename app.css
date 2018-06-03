@@ -33,12 +33,27 @@ li {
 
 i {
     visibility: hidden;
+    
 }
 
 .picked {
     background-color: plum;
+    
 }
 
-.iconPicked {
+.correctPick {
+    background-color: lightgreen;
+}
+
+.incorrectPick {
+    background-color: orangered;
+}
+
+.visible {
     visibility: visible;
+}
+
+.pickedIcon {
+    visibility: hidden;
+    transition-delay: 3s;
 }
