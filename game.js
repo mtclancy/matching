@@ -1,7 +1,27 @@
-resetButton = document.getElementById('reset');
+//variables
+
+
+
+
+window.onload = setBoardFirstTime;
+
+function setBoardFirstTime() {
+    setPieces();
+    addListener();
+}
+
+function resetBoard() {
+    deleteIcons();
+    setPieces();
+    removeListener();
+    addListener();
+}
+
+
 
 //creates random array, and places icons on the board
-window.onload = resetBoard;
+resetButton = document.getElementById('reset');
+resetButton.addEventListener('click', resetBoard);
 
 function setPieces() {
     let gamePieces = ["fa fa-anchor", "fa fa-anchor", "fa fa-automobile", "fa fa-automobile", "fa fa-bank", "fa fa-bank", "fa fa-bath", "fa fa-bath", "fa fa-bed", "fa fa-bed", "fa fa-bicycle", "fa fa-bicycle", "fa fa-bug", "fa fa-bug", "fa fa-child", "fa fa-child"];
@@ -14,47 +34,62 @@ function setPieces() {
         gamePieces.splice(num, 1);
         }
     for (i=0; i<16; i++) {
-        let space = document.getElementById("card"+i);
+        let square = document.getElementById("card"+i);
         let setIcon = document.createElement('i');
-        space.appendChild(setIcon).setAttribute('class', currentRound[i]);
+        square.appendChild(setIcon).setAttribute('class', currentRound[i]);
         setIcon.setAttribute('id','icon'+i);
     }   
+    for (i=0; i<16; i++) {
+        let square = document.getElementById('card'+i);
+        square.classList.remove('correctPick');
+        square.classList.remove('incorrectPick');
+        square.classList.remove('picked');
+    }
 }
 
 //removes existing icons when board is reset
 
 function deleteIcons() {
     for (i=0; i<16; i++) {
-        let cardNum = document.getElementById('card'+i);
-        while (cardNum.hasChildNodes()) {
-            cardNum.removeChild(cardNum.firstChild);
+        let square = document.getElementById('card'+i);
+        while (square.hasChildNodes()) {
+            square.removeChild(square.firstChild);
         }
     }
 }
 
-//combines two functions that allow the board to be reset when button is clicked
 
-function resetBoard() {
-    deleteIcons();
-    setPieces();
-    pickedItem();
+function removeListener() {
+    for (i=0; i < 16; i++) {
+        let square = document.getElementById('card'+i);
+        let icon = document.getElementById('icon'+i);
+        let pickIcon = function changeColor() {
+            square.className = 'picked';
+            icon.classList.add('visible');
+            runGame();
+            }
+        square.removeEventListener('click',pickIcon);
+    }
 }
 
-resetButton.addEventListener('click', resetBoard);
-
-//functionality for clicking on icons
-
-function pickedItem() {
-    for (i=0; i < 16; i++) {
-        let userChoice = document.getElementById('card'+i);
-        let userIcon = document.getElementById('icon'+i);
-        let changeColor = function() {
-            userChoice.className = 'picked';
-            userIcon.classList.add('visible');
-            userClicks();
-        } 
-        userChoice.addEventListener('click',changeColor);
+function addListener() {
+        for (i=0; i < 16; i++) {
+        let square = document.getElementById('card'+i);
+        let icon = document.getElementById('icon'+i);
+        let pickIcon = function changeColor() {
+            square.className = 'picked';
+            icon.classList.add('visible');
+            runGame();
+            }
+        square.addEventListener('click',pickIcon);  
     }
+}
+
+function runGame() {
+    let square = document.getElementById('card'+i);
+    let icon = document.getElementById('icon'+i);
+    if (document.getElementsByClassName('picked')[1] === undefined) {console.log('first pick');}
+    else {userClicks();};
 }
 
 //if the class and styles match, trigger event.
@@ -83,17 +118,17 @@ function userClicks() {
 }
 
 function removeRedMarker() {
-    let firstIncorrect = document.getElementsByClassName('incorrectPick')[0];
-    let secondIncorrect = document.getElementsByClassName('incorrectPick')[1];
-    let firstIncorrectIcon = firstIncorrect.firstChild;
-    let secondIncorrectIcon = secondIncorrect.firstChild;
-    firstIncorrect.classList.remove('incorrectPick');
-    secondIncorrect.classList.remove('incorrectPick');
-    firstIncorrectIcon.classList.remove('visible');
-    secondIncorrectIcon.classList.remove('visible');
+    if (document.getElementsByClassName('incorrectPick')[0] === undefined || document.getElementsByClassName('incorrectPick')[1] === undefined) {
+        console.log('cleared')
+    } else {
+            let firstIncorrect = document.getElementsByClassName('incorrectPick')[0];
+            let secondIncorrect = document.getElementsByClassName('incorrectPick')[1];
+            let firstIncorrectIcon = firstIncorrect.firstChild;
+            let secondIncorrectIcon = secondIncorrect.firstChild;
+            firstIncorrect.classList.remove('incorrectPick');
+            secondIncorrect.classList.remove('incorrectPick');
+            firstIncorrectIcon.classList.remove('visible');
+            secondIncorrectIcon.classList.remove('visible');
+    }
 }
-// firstIcon.style.visibility = 'hidden';
-   //         secondIcon.style.visibility = 'hidden';
-     //       
-       //     
 
