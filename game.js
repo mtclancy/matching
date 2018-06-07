@@ -1,6 +1,10 @@
 //variables
-
-
+let scoreCount = 0;
+let firstStar = document.getElementById('firstStar');
+let secondStar = document.getElementById('secondStar');
+let thirdStar = document.getElementById('thirdStar');
+let fourthStar = document.getElementById('fourthStar');
+let fifthStar = document.getElementById('fifthStar');
 
 
 window.onload = setBoardFirstTime;
@@ -11,9 +15,7 @@ function setBoardFirstTime() {
 }
 
 function resetBoard() {
-    deleteIcons();
-    setPieces();
-    addListener();
+    location.reload();
 }
 
 
@@ -48,7 +50,7 @@ function setPieces() {
 }
 
 //removes existing icons when board is reset
-
+/*
 function deleteIcons() {
     for (i=0; i<16; i++) {
         let square = document.getElementById('card'+i);
@@ -57,7 +59,7 @@ function deleteIcons() {
         }
     }
 }
-
+*/
 //adds the eventlistener that triggers a function when a square is clicked, also removes previous eventlisteners.
 function addListener() {
         for (i=0; i < 16; i++) {
@@ -68,7 +70,6 @@ function addListener() {
             icon.classList.add('visible');
             runGame();
             }
-        square.removeEventListener('click',pickIcon);
         square.addEventListener('click',pickIcon);
     }
 }
@@ -105,6 +106,7 @@ function userEvaluate() {
             secondPick.classList.remove('picked');
         };
     setTimeout(removeRedMarker, 2000);
+    evaluateWin();
 }
 
 function removeRedMarker() {
@@ -119,6 +121,32 @@ function removeRedMarker() {
             secondIncorrect.classList.remove('incorrectPick');
             firstIncorrectIcon.classList.remove('visible');
             secondIncorrectIcon.classList.remove('visible');
+            userScore();
     }
 }
 
+//evaluates if all spaces are marked correct
+function evaluateWin() {
+    if (document.getElementsByClassName('correctPick')[15] === undefined) {
+        console.log('continue game');} else {
+        console.log('Winner!');
+    };
+}
+
+//scoring function - tie to removeRedMarker(), if the "else" portion is triggered, add to counter.
+
+function userScore() {
+    scoreCount += 1;
+        if (scoreCount < 3) {
+            console.log("great job");} else if (scoreCount >= 3 && scoreCount < 6) {
+            firstStar.className = "fa fa-star-o";
+        } else if (scoreCount >= 6 && scoreCount < 9) {
+            secondStar.className = "fa fa-star-o";
+        } else if (scoreCount >= 9 && scoreCount < 12) {
+            thirdStar.className = "fa fa-star-o";
+        } else if (scoreCount >= 12 && scoreCount < 15) {
+            fourthStar.className = "fa fa-star-o";
+        } else if (scoreCount >= 15 && scoreCount < 18) {
+            fifthStar.className = "fa fa-star-o";
+        } 
+}
