@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Matching Game</title>
     <link rel='stylesheet' href='app.css'>
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -11,7 +12,9 @@
     <div class="container">
         <h1>Memory Game</h1>
         
-        <button id="reset">Reset</button>
+        <span id="reset" class="fa fa-refresh fa-2x"></span>
+        <br>
+        <span id="display">Time: <span id="currentTime"></span></span>
         <br>
         <div class="stars">
             <span id="firstStar" class="fa fa-star"></span>
@@ -20,6 +23,7 @@
             <span id="fourthStar" class="fa fa-star"></span>
             <span id="fifthStar" class="fa fa-star"></span>
         </div>
+        <br>
         <ul class="deck">
             <li id="card0" class=""></li>
             <li id="card1" class=""></li>

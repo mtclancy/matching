@@ -5,7 +5,8 @@ let secondStar = document.getElementById('secondStar');
 let thirdStar = document.getElementById('thirdStar');
 let fourthStar = document.getElementById('fourthStar');
 let fifthStar = document.getElementById('fifthStar');
-
+let startTime = 0;
+let endTime = 1;
 
 window.onload = setBoardFirstTime;
 
@@ -26,7 +27,7 @@ resetButton.addEventListener('click', resetBoard);
 
 //creates random array, and places icons on the board.  Function also clears "correct" and "incorrect" classes.
 function setPieces() {
-    let gamePieces = ["fa fa-anchor", "fa fa-anchor", "fa fa-automobile", "fa fa-automobile", "fa fa-bank", "fa fa-bank", "fa fa-bath", "fa fa-bath", "fa fa-bed", "fa fa-bed", "fa fa-bicycle", "fa fa-bicycle", "fa fa-bug", "fa fa-bug", "fa fa-child", "fa fa-child"];
+    let gamePieces = ["fa fa-anchor fa-3x", "fa fa-anchor fa-3x", "fa fa-automobile fa-3x", "fa fa-automobile fa-3x", "fa fa-bank fa-3x", "fa fa-bank fa-3x", "fa fa-bath fa-3x", "fa fa-bath fa-3x", "fa fa-bed fa-3x", "fa fa-bed fa-3x", "fa fa-bicycle fa-3x", "fa fa-bicycle fa-3x", "fa fa-bug fa-3x", "fa fa-bug fa-3x", "fa fa-child fa-3x", "fa fa-child fa-3x"];
 
     let currentRound = [];
 
