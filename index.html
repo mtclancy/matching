@@ -13,7 +13,7 @@
         
         <button id="reset">Reset</button>
         <br>
-        <div class="score">
+        <div class="stars">
             <span id="firstStar" class="fa fa-star"></span>
             <span id="secondStar" class="fa fa-star"></span>
             <span id="thirdStar" class="fa fa-star"></span>
@@ -38,6 +38,14 @@
             <li id="card14" class=""></li>
             <li id="card15" class=""></li>
         </ul>
+        <div id="winModal" class="modal">
+            <div class="winContent">
+            <span class="close">&#10005</span>
+                <p class="message">Winner!</p>
+                <p class="time">Your Time: <span id= "myTime"></span></p>
+                <p class="score">Your Score: <span id= "myScore"></span></p>
+            </div>
+        </div>
     </div>
     
     <script src="game.js"></script>

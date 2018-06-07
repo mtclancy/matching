@@ -66,10 +66,12 @@ function addListener() {
         let square = document.getElementById('card'+i);
         let icon = document.getElementById('icon'+i);
         let pickIcon = function() {
+            if(document.getElementsByClassName('incorrectPick')[1] === undefined) {
             square.className = 'picked';
             icon.classList.add('visible');
             runGame();
-            }
+            } else {return null;};
+        }
         square.addEventListener('click',pickIcon);
     }
 }
@@ -129,8 +131,32 @@ function removeRedMarker() {
 function evaluateWin() {
     if (document.getElementsByClassName('correctPick')[15] === undefined) {
         console.log('continue game');} else {
-        console.log('Winner!');
+        let modal = document.getElementById('winModal');
+        modal.style.display = 'block';
+        reportScore();
     };
+}
+
+function reportScore() {
+    let myScore = document.getElementById('myScore');
+    let starNum = 5;
+    if (scoreCount < 3) {
+            starNum = 5;
+        } else if (scoreCount >= 6 && scoreCount < 9) {
+            starNum = 4;
+        } else if (scoreCount >= 9 && scoreCount < 12) {
+            starNum = 3;
+        } else if (scoreCount >= 12 && scoreCount < 15) {
+            starNum = 2;
+        } else if (scoreCount >= 15 && scoreCount < 18) {
+            starNum = 1;
+        } ;
+    
+    for (i=1; i < starNum; i++) {
+        let addStar = document.createElement('span');
+        myScore.appendChild(addStar).setAttribute('class', 'fa fa-star');
+    }
+    
 }
 
 //scoring function - tie to removeRedMarker(), if the "else" portion is triggered, add to counter.
