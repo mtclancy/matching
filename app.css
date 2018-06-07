@@ -7,6 +7,7 @@
 }
 
 .deck {
+    max-width: 95%;
     width: 660px;
     background: linear-gradient(black,deepskyblue);
     border-radius: 10px;

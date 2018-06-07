@@ -13,16 +13,16 @@ function setBoardFirstTime() {
 function resetBoard() {
     deleteIcons();
     setPieces();
-    removeListener();
     addListener();
 }
 
 
 
-//creates random array, and places icons on the board
 resetButton = document.getElementById('reset');
 resetButton.addEventListener('click', resetBoard);
 
+
+//creates random array, and places icons on the board.  Function also clears "correct" and "incorrect" classes.
 function setPieces() {
     let gamePieces = ["fa fa-anchor", "fa fa-anchor", "fa fa-automobile", "fa fa-automobile", "fa fa-bank", "fa fa-bank", "fa fa-bath", "fa fa-bath", "fa fa-bed", "fa fa-bed", "fa fa-bicycle", "fa fa-bicycle", "fa fa-bug", "fa fa-bug", "fa fa-child", "fa fa-child"];
 
@@ -58,42 +58,32 @@ function deleteIcons() {
     }
 }
 
-
-function removeListener() {
-    for (i=0; i < 16; i++) {
+//adds the eventlistener that triggers a function when a square is clicked, also removes previous eventlisteners.
+function addListener() {
+        for (i=0; i < 16; i++) {
         let square = document.getElementById('card'+i);
         let icon = document.getElementById('icon'+i);
-        let pickIcon = function changeColor() {
+        let pickIcon = function() {
             square.className = 'picked';
             icon.classList.add('visible');
             runGame();
             }
         square.removeEventListener('click',pickIcon);
+        square.addEventListener('click',pickIcon);
     }
 }
 
-function addListener() {
-        for (i=0; i < 16; i++) {
-        let square = document.getElementById('card'+i);
-        let icon = document.getElementById('icon'+i);
-        let pickIcon = function changeColor() {
-            square.className = 'picked';
-            icon.classList.add('visible');
-            runGame();
-            }
-        square.addEventListener('click',pickIcon);  
-    }
-}
 
+//precursor to function that evaluates user picks for matches - function clears an error.
 function runGame() {
     let square = document.getElementById('card'+i);
     let icon = document.getElementById('icon'+i);
     if (document.getElementsByClassName('picked')[1] === undefined) {console.log('first pick');}
-    else {userClicks();};
+    else {userEvaluate();};
 }
 
 //if the class and styles match, trigger event.
-function userClicks() {
+function userEvaluate() {
     let firstPick = document.getElementsByClassName('picked')[0];
     let firstIcon = firstPick.firstChild.getAttribute('class');
     let secondPick = document.getElementsByClassName('picked')[1];
