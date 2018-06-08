@@ -5,10 +5,20 @@ let secondStar = document.getElementById('secondStar');
 let thirdStar = document.getElementById('thirdStar');
 let fourthStar = document.getElementById('fourthStar');
 let fifthStar = document.getElementById('fifthStar');
+let gameContainer = document.getElementById('gameContainer');
 let startTime = 0;
 let endTime = 1;
+let modal = document.getElementById('winModal');
+let close = document.getElementById('closeWindow')
+let startClock = function() {
+    startTime = new Date().getTime();
+}
+let closeModal = function closing() {
+    modal.style.display = 'none';
+};
 
 window.onload = setBoardFirstTime;
+
 
 function setBoardFirstTime() {
     setPieces();
@@ -23,11 +33,12 @@ function resetBoard() {
 
 resetButton = document.getElementById('reset');
 resetButton.addEventListener('click', resetBoard);
-
+close.addEventListener('click',closeModal);
+gameContainer.addEventListener('click',startClock,{once: true});
 
 //creates random array, and places icons on the board.  Function also clears "correct" and "incorrect" classes.
 function setPieces() {
-    let gamePieces = ["fa fa-anchor fa-3x", "fa fa-anchor fa-3x", "fa fa-automobile fa-3x", "fa fa-automobile fa-3x", "fa fa-bank fa-3x", "fa fa-bank fa-3x", "fa fa-bath fa-3x", "fa fa-bath fa-3x", "fa fa-bed fa-3x", "fa fa-bed fa-3x", "fa fa-bicycle fa-3x", "fa fa-bicycle fa-3x", "fa fa-bug fa-3x", "fa fa-bug fa-3x", "fa fa-child fa-3x", "fa fa-child fa-3x"];
+    let gamePieces = ["fa fa-anchor fa-2x", "fa fa-anchor fa-2x", "fa fa-automobile fa-2x", "fa fa-automobile fa-2x", "fa fa-bank fa-2x", "fa fa-bank fa-2x", "fa fa-bath fa-2x", "fa fa-bath fa-2x", "fa fa-bed fa-2x", "fa fa-bed fa-2x", "fa fa-bicycle fa-2x", "fa fa-bicycle fa-2x", "fa fa-bug fa-2x", "fa fa-bug fa-2x", "fa fa-child fa-2x", "fa fa-child fa-2x"];
 
     let currentRound = [];
 
@@ -132,8 +143,8 @@ function removeRedMarker() {
 function evaluateWin() {
     if (document.getElementsByClassName('correctPick')[15] === undefined) {
         console.log('continue game');} else {
-        let modal = document.getElementById('winModal');
         modal.style.display = 'block';
+        timeCalculation();
         reportScore();
     };
 }
@@ -176,4 +187,11 @@ function userScore() {
         } else if (scoreCount >= 15 && scoreCount < 18) {
             fifthStar.className = "fa fa-star-o";
         } 
+}
+
+function timeCalculation() {
+    let endTime = new Date().getTime();
+    let gameTime = Math.floor((endTime-startTime)/1000);
+    let myTime = document.getElementById('myTime');
+    myTime.innerHTML = gameTime + " seconds";
 }

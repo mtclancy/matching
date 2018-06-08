@@ -12,9 +12,7 @@
     <div class="container">
         <h1>Memory Game</h1>
         
-        <span id="reset" class="fa fa-refresh fa-2x"></span>
-        <br>
-        <span id="display">Time: <span id="currentTime"></span></span>
+        <span id="reset" class="fa fa-refresh fa-2x" title="Reset"></span>
         <br>
         <div class="stars">
             <span id="firstStar" class="fa fa-star"></span>
@@ -24,27 +22,29 @@
             <span id="fifthStar" class="fa fa-star"></span>
         </div>
         <br>
-        <ul class="deck">
-            <li id="card0" class=""></li>
-            <li id="card1" class=""></li>
-            <li id="card2" class=""></li>
-            <li id="card3" class=""></li>
-            <li id="card4" class=""></li>
-            <li id="card5" class=""></li>
-            <li id="card6" class=""></li>
-            <li id="card7" class=""></li>
-            <li id="card8" class=""></li>
-            <li id="card9" class=""></li>
-            <li id="card10" class=""></li>
-            <li id="card11" class=""></li>
-            <li id="card12" class=""></li>
-            <li id="card13" class=""></li>
-            <li id="card14" class=""></li>
-            <li id="card15" class=""></li>
-        </ul>
+        <div id = "gameContainer">
+            <ul class="deck">
+                <li id="card0" class=""></li>
+                <li id="card1" class=""></li>
+                <li id="card2" class=""></li>
+                <li id="card3" class=""></li>
+                <li id="card4" class=""></li>
+                <li id="card5" class=""></li>
+                <li id="card6" class=""></li>
+                <li id="card7" class=""></li>
+                <li id="card8" class=""></li>
+                <li id="card9" class=""></li>
+                <li id="card10" class=""></li>
+                <li id="card11" class=""></li>
+                <li id="card12" class=""></li>
+                <li id="card13" class=""></li>
+                <li id="card14" class=""></li>
+                <li id="card15" class=""></li>
+            </ul>
+        </div>
         <div id="winModal" class="modal">
             <div class="winContent">
-            <span class="close">&#10005</span>
+            <span class="close" id="closeWindow">&#10005</span>
                 <p class="message">Winner!</p>
                 <p class="time">Your Time: <span id= "myTime"></span></p>
                 <p class="score">Your Score: <span id= "myScore"></span></p>
