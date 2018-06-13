@@ -6,16 +6,15 @@ let thirdStar = document.getElementById('thirdStar');
 let fourthStar = document.getElementById('fourthStar');
 let fifthStar = document.getElementById('fifthStar');
 let gameContainer = document.getElementById('gameContainer');
-let startTime = 0;
-let endTime = 1;
+let timer = 0;
 let modal = document.getElementById('winModal');
 let close = document.getElementById('closeWindow')
-let startClock = function() {
-    startTime = new Date().getTime();
-}
 let closeModal = function closing() {
     modal.style.display = 'none';
 };
+let startTimer = function startTime() {
+  setInterval(displayTime, 1000);
+};  
 
 window.onload = setBoardFirstTime;
 
@@ -34,7 +33,7 @@ function resetBoard() {
 resetButton = document.getElementById('reset');
 resetButton.addEventListener('click', resetBoard);
 close.addEventListener('click',closeModal);
-gameContainer.addEventListener('click',startClock,{once: true});
+gameContainer.addEventListener('click',startTimer,{once: true});
 
 //creates random array, and places icons on the board.  Function also clears "correct" and "incorrect" classes.
 function setPieces() {
@@ -143,9 +142,10 @@ function removeRedMarker() {
 function evaluateWin() {
     if (document.getElementsByClassName('correctPick')[15] === undefined) {
         console.log('continue game');} else {
-        modal.style.display = 'block';
-        timeCalculation();
+        stopTimer();
         reportScore();
+        modal.style.display = 'block';
+        
     };
 }
 
@@ -189,9 +189,13 @@ function userScore() {
         } 
 }
 
-function timeCalculation() {
-    let endTime = new Date().getTime();
-    let gameTime = Math.floor((endTime-startTime)/1000);
-    let myTime = document.getElementById('myTime');
-    myTime.innerHTML = gameTime + " seconds";
+function displayTime() {
+  timer += 1;
+  document.getElementById('displayTime').innerHTML = timer;
+}
+
+function stopTimer() {
+  let myTime = document.getElementById('myTime');
+  myTime.innerHTML = timer + ' seconds';
+  clearInterval(startTime);
 }
