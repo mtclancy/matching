@@ -12,7 +12,7 @@ let close = document.getElementById('closeWindow')
 let closeModal = function closing() {
     modal.style.display = 'none';
 };
-let startTimer = function startTime() {
+let startTimer = function() {
   setInterval(displayTime, 1000);
 };  
 
@@ -143,9 +143,10 @@ function evaluateWin() {
     if (document.getElementsByClassName('correctPick')[15] === undefined) {
         console.log('continue game');} else {
         stopTimer();
-        reportScore();
         modal.style.display = 'block';
-        
+        let myTime = document.getElementById('myTime');
+        myTime.innerHTML = timer + ' seconds';
+        reportScore();
     };
 }
 
@@ -195,7 +196,5 @@ function displayTime() {
 }
 
 function stopTimer() {
-  let myTime = document.getElementById('myTime');
-  myTime.innerHTML = timer + ' seconds';
-  clearInterval(startTime);
+  clearInterval(startTimer);
 }
