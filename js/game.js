@@ -1,4 +1,4 @@
-//variables
+//Global variables
 let scoreCount = 0;
 let firstStar = document.getElementById('firstStar');
 let secondStar = document.getElementById('secondStar');
@@ -7,6 +7,8 @@ let fourthStar = document.getElementById('fourthStar');
 let fifthStar = document.getElementById('fifthStar');
 let gameContainer = document.getElementById('gameContainer');
 let timer = 0;
+let timeDisplay = document.getElementById('displayTime');
+let moveCounter = 0;
 let modal = document.getElementById('winModal');
 let close = document.getElementById('closeWindow')
 let closeModal = function closing() {
@@ -16,9 +18,16 @@ let startTimer = function() {
   setInterval(displayTime, 1000);
 };  
 
+
+//Events
 window.onload = setBoardFirstTime;
+resetButton = document.getElementById('reset');
+resetButton.addEventListener('click', resetBoard);
+close.addEventListener('click',closeModal);
+gameContainer.addEventListener('click',startTimer,{once: true});
 
 
+//Loading the board
 function setBoardFirstTime() {
     setPieces();
     addListener();
@@ -28,14 +37,6 @@ function resetBoard() {
     location.reload();
 }
 
-
-
-resetButton = document.getElementById('reset');
-resetButton.addEventListener('click', resetBoard);
-close.addEventListener('click',closeModal);
-gameContainer.addEventListener('click',startTimer,{once: true});
-
-//creates random array, and places icons on the board.  Function also clears "correct" and "incorrect" classes.
 function setPieces() {
     let gamePieces = ["fa fa-anchor fa-2x", "fa fa-anchor fa-2x", "fa fa-automobile fa-2x", "fa fa-automobile fa-2x", "fa fa-bank fa-2x", "fa fa-bank fa-2x", "fa fa-bath fa-2x", "fa fa-bath fa-2x", "fa fa-bed fa-2x", "fa fa-bed fa-2x", "fa fa-bicycle fa-2x", "fa fa-bicycle fa-2x", "fa fa-bug fa-2x", "fa fa-bug fa-2x", "fa fa-child fa-2x", "fa fa-child fa-2x"];
 
@@ -60,18 +61,6 @@ function setPieces() {
     }
 }
 
-//removes existing icons when board is reset
-/*
-function deleteIcons() {
-    for (i=0; i<16; i++) {
-        let square = document.getElementById('card'+i);
-        while (square.hasChildNodes()) {
-            square.removeChild(square.firstChild);
-        }
-    }
-}
-*/
-//adds the eventlistener that triggers a function when a square is clicked, also removes previous eventlisteners.
 function addListener() {
         for (i=0; i < 16; i++) {
         let square = document.getElementById('card'+i);
@@ -88,7 +77,7 @@ function addListener() {
 }
 
 
-//precursor to function that evaluates user picks for matches - function clears an error.
+//Functions controlling and evaluating user interactions
 function runGame() {
     let square = document.getElementById('card'+i);
     let icon = document.getElementById('icon'+i);
@@ -96,7 +85,6 @@ function runGame() {
     else {userEvaluate();};
 }
 
-//if the class and styles match, trigger event.
 function userEvaluate() {
     let firstPick = document.getElementsByClassName('picked')[0];
     let firstIcon = firstPick.firstChild.getAttribute('class');
@@ -110,13 +98,15 @@ function userEvaluate() {
         firstPick.classList.add('correctPick');
         secondPick.classList.add('correctPick');
         firstPick.classList.remove('picked');
-        secondPick.classList.remove('picked');} else {
+        secondPick.classList.remove('picked');
+        displayMoves();} else {
             let firstIcon = firstPick.firstChild;
             let secondIcon = secondPick.firstChild;
             firstPick.classList.add('incorrectPick');
             secondPick.classList.add('incorrectPick');
             firstPick.classList.remove('picked');
             secondPick.classList.remove('picked');
+            displayMoves();
         };
     setTimeout(removeRedMarker, 2000);
     evaluateWin();
@@ -138,18 +128,15 @@ function removeRedMarker() {
     }
 }
 
-//evaluates if all spaces are marked correct
+
 function evaluateWin() {
     if (document.getElementsByClassName('correctPick')[15] === undefined) {
         console.log('continue game');} else {
-        stopTimer();
-        modal.style.display = 'block';
-        let myTime = document.getElementById('myTime');
-        myTime.innerHTML = timer + ' seconds';
-        reportScore();
+        modalControl();
     };
 }
 
+//Functions related to score and modal display
 function reportScore() {
     let myScore = document.getElementById('myScore');
     let starNum = 5;
@@ -172,8 +159,6 @@ function reportScore() {
     
 }
 
-//scoring function - tie to removeRedMarker(), if the "else" portion is triggered, add to counter.
-
 function userScore() {
     scoreCount += 1;
         if (scoreCount < 3) {
@@ -190,11 +175,19 @@ function userScore() {
         } 
 }
 
-function displayTime() {
-  timer += 1;
-  document.getElementById('displayTime').innerHTML = timer;
+function displayMoves() {
+  moveCounter += 1;
+  document.getElementById('displayMoves').innerHTML = moveCounter;
 }
 
-function stopTimer() {
-  clearInterval(startTimer);
+function displayTime() {
+  timer += 1;
+  timeDisplay.innerHTML = timer;
+}
+
+function modalControl() {
+  modal.style.display = 'block';
+  let myTime = document.getElementById('myTime');
+  myTime.innerHTML = timer + ' seconds';
+  reportScore();
 }
