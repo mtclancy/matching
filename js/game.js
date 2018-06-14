@@ -188,6 +188,8 @@ function displayTime() {
 function modalControl() {
   modal.style.display = 'block';
   let myTime = document.getElementById('myTime');
+  let myMoves = document.getElementById('myMoves');
   myTime.innerHTML = timer + ' seconds';
+  myMoves.innerHTML = moveCounter;
   reportScore();
 }

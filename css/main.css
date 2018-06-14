@@ -98,7 +98,8 @@ i {
 }
 
 .time,
-.score {
+.score,
+.moves  {
     text-align: center;
 }
 
