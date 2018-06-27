@@ -78,12 +78,12 @@ i {
     height: 100%;
     width: 100%;
     background-color: white;
-    margin-top: 25%;
-    padding: 10%;
+    margin-top: 5%;
+    padding: 5%;
 }
 
 .winContent {
-    margin: 10% 20%;
+    margin: 30% 10%;
     border: solid black 3px;
     padding: 10px;
 }
