@@ -10,13 +10,13 @@ let timer = 0;
 let timeDisplay = document.getElementById('displayTime');
 let moveCounter = 0;
 let modal = document.getElementById('winModal');
-let close = document.getElementById('closeWindow')
+let close = document.getElementById('closeWindow');
 let closeModal = function closing() {
     modal.style.display = 'none';
 };
 let startTimer = function() {
   setInterval(displayTime, 1000);
-};  
+};
 
 
 //Events
@@ -38,7 +38,11 @@ function resetBoard() {
 }
 
 function setPieces() {
-    let gamePieces = ["fa fa-anchor fa-2x", "fa fa-anchor fa-2x", "fa fa-automobile fa-2x", "fa fa-automobile fa-2x", "fa fa-bank fa-2x", "fa fa-bank fa-2x", "fa fa-bath fa-2x", "fa fa-bath fa-2x", "fa fa-bed fa-2x", "fa fa-bed fa-2x", "fa fa-bicycle fa-2x", "fa fa-bicycle fa-2x", "fa fa-bug fa-2x", "fa fa-bug fa-2x", "fa fa-child fa-2x", "fa fa-child fa-2x"];
+    let gamePieces = ["fa fa-anchor fa-2x", "fa fa-anchor fa-2x", "fa fa-automobile fa-2x", 
+                      "fa fa-automobile fa-2x", "fa fa-bank fa-2x", "fa fa-bank fa-2x", 
+                      "fa fa-bath fa-2x", "fa fa-bath fa-2x", "fa fa-bed fa-2x", "fa fa-bed fa-2x",
+                      "fa fa-bicycle fa-2x", "fa fa-bicycle fa-2x", "fa fa-bug fa-2x", 
+                      "fa fa-bug fa-2x", "fa fa-child fa-2x", "fa fa-child fa-2x"];
 
     let currentRound = [];
 
@@ -52,7 +56,7 @@ function setPieces() {
         let setIcon = document.createElement('i');
         square.appendChild(setIcon).setAttribute('class', currentRound[i]);
         setIcon.setAttribute('id','icon'+i);
-    }   
+    }  
     for (i=0; i<16; i++) {
         let square = document.getElementById('card'+i);
         square.classList.remove('correctPick');
@@ -81,8 +85,9 @@ function addListener() {
 function runGame() {
     let square = document.getElementById('card'+i);
     let icon = document.getElementById('icon'+i);
-    if (document.getElementsByClassName('picked')[1] === undefined) {console.log('first pick');}
-    else {userEvaluate();};
+    if (document.getElementsByClassName('picked')[1] === undefined) {
+      console.log('first pick');} else {
+      userEvaluate();};
 }
 
 function userEvaluate() {
@@ -108,14 +113,14 @@ function userEvaluate() {
             secondPick.classList.remove('picked');
             displayMoves();
         };
+  
     setTimeout(removeRedMarker, 2000);
     evaluateWin();
 }
 
 function removeRedMarker() {
     if (document.getElementsByClassName('incorrectPick')[0] === undefined || document.getElementsByClassName('incorrectPick')[1] === undefined) {
-        console.log('cleared')
-    } else {
+        console.log('cleared')} else {
             let firstIncorrect = document.getElementsByClassName('incorrectPick')[0];
             let secondIncorrect = document.getElementsByClassName('incorrectPick')[1];
             let firstIncorrectIcon = firstIncorrect.firstChild;
