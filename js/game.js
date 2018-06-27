@@ -5,13 +5,13 @@ let secondStar = document.getElementById('secondStar');
 let thirdStar = document.getElementById('thirdStar');
 let fourthStar = document.getElementById('fourthStar');
 let fifthStar = document.getElementById('fifthStar');
-let gameContainer = document.getElementById('gameContainer');
+const gameContainer = document.getElementById('gameContainer');
 let timer = 0;
 let timeDisplay = document.getElementById('displayTime');
 let moveCounter = 0;
-let modal = document.getElementById('winModal');
-let close = document.getElementById('closeWindow');
-let closeModal = function closing() {
+const modal = document.getElementById('winModal');
+const close = document.getElementById('closeWindow');
+const closeModal = function closing() {
     modal.style.display = 'none';
 };
 let startTimer = function() {
